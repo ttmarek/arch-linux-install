@@ -9,9 +9,22 @@
   * You don't want to have any swap space (paid good money for RAM)
   * You want to keep `/` root and `/home` in the same partition
   * You are installing arch on an intel-cpu
+  * You are dual-booting a computer pre-installed with Windows 10 with
+    Arch Linux
 
 
 ## Preparation
+
+### Boot the computer into BIOS, and disable secure boot.
+  * [Why?](https://wiki.archlinux.org/index.php/Dual_boot_with_Windows#UEFI_Secure_Boot)
+  * [How to boot into BIOS Windows 10](https://www.youtube.com/watch?v=UPIUkPGaGys)
+  * There will be a `Secure Boot` option somewhere buried under the
+    tabs and menus, set it to `[Disabled]`.
+
+### Disable fast boot.
+  * [Why?](https://wiki.archlinux.org/index.php/Dual_boot_with_Windows#Fast_Start-Up)
+  * [How to turn off Fast Startup Windows 10](http://www.tenforums.com/tutorials/4189-fast-startup-turn-off-windows-10-a.html)
+
 If you're running Arch in VirtualBox make sure you give the virtual
 machine at least 256 MB of RAM and 800 MB of disk space.
 
@@ -181,6 +194,13 @@ formatted correctly.
 
 #### Map the partitions to directories in the live system (create mount points)
 
+Mount the root partition (e.g `sda3`) to `/mnt` (The root partition
+must be mounted first):
+
+```
+root@archiso ~ # mount /dev/sda3 /mnt
+```
+
 Mount the EFI partition (e.g `sda1`) to `/mnt/boot`:
 
 ```
@@ -188,11 +208,6 @@ root@archiso ~ # mkdir /mnt/boot
 root@archiso ~ # mount /dev/sda1 /mnt/boot
 ```
 
-Mount the root partition (e.g `sda3`) to `/mnt`:
-
-```
-root@archiso ~ # mount /dev/sda3 /mnt
-```
 
 ### Install the base packages
 
